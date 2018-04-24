@@ -23,7 +23,14 @@ default: &default
 
 development:
   <<: *default
-  database: final-facebook_development
+# development:
+  adapter: postgresql
+  encoding: unicode
+  database: "final-facebook_development"
+  # database: projectname
+  pool: 5
+  username: rails
+  password: password
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,7 +64,13 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+# test:
+  adapter: postgresql
+  encoding: unicode
   database: final-facebook_test
+  pool: 5
+  username: rails
+  password: password
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
