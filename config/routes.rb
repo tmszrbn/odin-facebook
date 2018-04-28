@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  get 'user/index'
-  get 'user/show'
+  get 'users/index'
+  get 'users/show'
   # devise_scope :user do
   #   root to: 'devise/registrations#new'
   # end
