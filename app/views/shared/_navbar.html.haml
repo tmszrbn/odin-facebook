@@ -1,8 +1,8 @@
 %nav.navbar
   %ul.navbar__links
-    %li= link_to 'OdinBook', user_index_path
+    %li= link_to 'OdinBook', users_index_path
     - if user_signed_in?
-      %li= link_to('Log out', destroy_users_session_path, method: :delete) 
+      %li= link_to('Log out', destroy_user_session_path, method: :delete) 
       %li= "Friend requests: #{current_user.received_friendship_requests.count}"
       %ul
         - current_user.received_friendship_requests.all.to_a.each do |req|
