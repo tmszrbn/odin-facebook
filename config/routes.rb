@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  get 'user/index'
+  get 'user/show'
+  # devise_scope :user do
+  #   root to: 'devise/registrations#new'
+  # end
+
   get 'comments/new'
   get 'comments/edit'
 

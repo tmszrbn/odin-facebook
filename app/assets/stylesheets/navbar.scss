@@ -1,0 +1,9 @@
+.navbar {
+  background: hsl(200, 50%, 50%);
+
+  &__links {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around
+  }
+}
