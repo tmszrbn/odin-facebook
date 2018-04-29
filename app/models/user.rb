@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments
   has_many :likes
-  has_many :liked_posts, through: :likes, source: :post
+  has_many :liked_posts, through: :likes, source: :likeable, source_type: 'Post'
 
   has_many :friendships
   has_many :friends, through: :friendships
@@ -36,17 +36,25 @@ class User < ApplicationRecord
   def all_friends
     self.friends + self.inverse_friends
   end
+  def friends_with? user
+    self.friends.where(id: user.id).exists? || self.inverse_friends.where(id: user.id).exists?
+  end
 
-  
-  # private
-    def friends_with? user
-      self.friends.where(id: user.id).exists? || self.inverse_friends.where(id: user.id).exists?
-    end
+  def create_post title, content
+    self.posts.create title: title, content: content
+  end
+
+  def like_post post
+    self.liked_posts << post unless self.likes_post? post
+  end
+  def likes_post? post
+    self.liked_posts.where(id: post.id).exists?
+  end
     
-    def friendship_request_to? user
-      self.sent_friendship_requests.where(receiver_id: user.id).exists?
-    end
-    def friendship_request_from? user
-      self.received_friendship_requests.where(sender_id: user.id).exists?
-    end
+  def friendship_request_to? user
+    self.sent_friendship_requests.where(receiver_id: user.id).exists?
+  end
+  def friendship_request_from? user
+    self.received_friendship_requests.where(sender_id: user.id).exists?
+  end
 end

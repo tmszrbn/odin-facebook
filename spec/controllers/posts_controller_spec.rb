@@ -15,6 +15,14 @@ RSpec.describe PostsController, type: :controller do
     include_examples 'redirecting_not_logged_in', :new
   end
   
+  describe "POST #create" do
+    include_examples 'redirecting_not_logged_in', :create, :post
+  end
+  
+  describe "DELETE #destroy" do
+    include_examples 'redirecting_not_logged_in', :destroy, :delete
+  end
+  
   describe "GET #show" do
     include_examples 'redirecting_not_logged_in', :show
   end

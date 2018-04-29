@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get 'posts/index'
   get 'posts/edit'
   get 'posts/new'
+  post 'posts/create'
+  delete 'posts/destroy'
   get 'posts/show'
 
   devise_for :users
