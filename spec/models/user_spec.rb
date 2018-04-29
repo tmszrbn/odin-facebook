@@ -108,4 +108,12 @@ RSpec.describe User, type: :model do
       expect(u1.likes_post?(p1)).to eq(false)
     end
   end
+
+  describe '#add_comment' do
+    it 'adds comment to the post' do
+      expect(p1.comments.count).to eq(0)
+      u1.add_comment p1, 'I like that'
+      expect(p1.comments.count).to eq(1)
+    end
+  end
 end

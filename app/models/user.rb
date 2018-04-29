@@ -24,13 +24,19 @@ class User < ApplicationRecord
       self.sent_friendship_requests.create receiver_id: receiver.id
     end
   end
-
   def accept_friendship_request user
     if friendship_request_from?(user)
       self.friends << user 
       self.received_friendship_requests.where(sender_id: user.id).destroy_all
       user.sent_friendship_requests.where(receiver_id: self.id).destroy_all
     end
+  end
+  
+  def friendship_request_to? user
+    self.sent_friendship_requests.where(receiver_id: user.id).exists?
+  end
+  def friendship_request_from? user
+    self.received_friendship_requests.where(sender_id: user.id).exists?
   end
 
   def all_friends
@@ -50,11 +56,8 @@ class User < ApplicationRecord
   def likes_post? post
     self.liked_posts.where(id: post.id).exists?
   end
-    
-  def friendship_request_to? user
-    self.sent_friendship_requests.where(receiver_id: user.id).exists?
-  end
-  def friendship_request_from? user
-    self.received_friendship_requests.where(sender_id: user.id).exists?
+
+  def add_comment post, comment_body
+    post.comments.create user_id: self.id, content: comment_body
   end
 end
