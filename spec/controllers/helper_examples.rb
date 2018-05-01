@@ -24,6 +24,6 @@ RSpec.shared_examples 'redirecting_not_logged_in' do |action, method|
         delete action
       end
     end
-    expect(response).to have_http_status(:success)
+    expect(response).to be_successful
   end
 end

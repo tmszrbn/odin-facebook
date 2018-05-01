@@ -5,7 +5,6 @@ ruby '2.5.1'
 
 gem 'haml'
 gem 'haml-rails'
-gem 'rspec'
 gem 'simple_form'
 gem 'devise'
 gem 'rails-controller-testing'
@@ -46,6 +45,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec'
+  gem 'factory_bot_rails'
 end
 
 group :development do

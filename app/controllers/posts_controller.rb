@@ -1,25 +1,41 @@
 class PostsController < ApplicationController
+
+  before_action :require_login
   def index
-    redirect_to new_user_registration_path unless user_signed_in?
   end
 
   def edit
-    redirect_to new_user_registration_path unless user_signed_in?
+  end
+
+  def update
   end
 
   def new
-    redirect_to new_user_registration_path unless user_signed_in?
+    @post = Post.new
+    debugger
   end
 
   def create
-    redirect_to new_user_registration_path unless user_signed_in?
+    unless user_signed_in?
+      redirect_to new_user_registration_path 
+    else
+      @post = Post.new post_params
+      if @post.save
+        redirect_to @post
+      else
+        render :new
+      end
+    end
   end
 
   def destroy
-    redirect_to new_user_registration_path unless user_signed_in?
   end
 
   def show
-    redirect_to new_user_registration_path unless user_signed_in?
   end
+
+  private 
+    def post_params
+      params.require(:post).permit(:title, :content, :user_id)
+    end
 end

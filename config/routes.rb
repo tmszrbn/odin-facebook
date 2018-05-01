@@ -8,13 +8,15 @@ Rails.application.routes.draw do
 
   get 'comments/new'
   get 'comments/edit'
-
-  get 'posts/index'
-  get 'posts/edit'
-  get 'posts/new'
-  post 'posts/create'
-  delete 'posts/destroy'
-  get 'posts/show'
+  
+  resources :posts
+  # post 'comments/create'
+  # get 'posts/index'
+  # get 'posts/edit'
+  # get 'posts/new'
+  # post 'posts/create'
+  # delete 'posts/destroy'
+  # get 'posts/show'
 
   devise_for :users
   # devise_for :users, controllers: {

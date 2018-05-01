@@ -1,2 +1,7 @@
 %h1 Posts#new
-%p Find me in app/views/posts/new.html.haml
+
+= simple_form_for @post do |f|
+  = f.input :title, as: :string, label: 'Title of the post'
+  = f.input :content, as: :text, label: 'Content of the post'
+  = f.input :user_id, as: :hidden, input_html: { value: "#{current_user.id}" }
+  = f.button :submit, label: 'Create post'
