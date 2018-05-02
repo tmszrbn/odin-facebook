@@ -10,13 +10,9 @@ Rails.application.routes.draw do
   get 'comments/edit'
   
   resources :posts
-  # post 'comments/create'
-  # get 'posts/index'
-  # get 'posts/edit'
-  # get 'posts/new'
-  # post 'posts/create'
-  # delete 'posts/destroy'
-  # get 'posts/show'
+  
+  resources :friendship_requests, only: [:create, :destroy]
+  resources :likes, only: [:create, :destroy]
 
   devise_for :users
   # devise_for :users, controllers: {

@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
-
   before_action :require_login
+
   def index
+    @posts = Post.all
+    @like = Like.new
   end
 
   def edit
@@ -12,7 +14,6 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    debugger
   end
 
   def create

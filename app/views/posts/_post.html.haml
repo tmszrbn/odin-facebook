@@ -1,0 +1,7 @@
+%li
+  %div= post.title
+  %div= post.content
+  = button_to "Like #{post.likes.count}", likes_path, method: :post, params: { like: { user_id: current_user.id, likeable_id: post.id, likeable_type: post.class } }
+  = flash.each do |msg|
+    = msg
+    
