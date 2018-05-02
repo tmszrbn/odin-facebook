@@ -2,18 +2,19 @@ require 'rails_helper'
 
 RSpec.describe 'Friendship Request Menagement', type: :request do
   
+  let(:user1) { create(:user) }
+  let(:user2) { create(:user) }
+  
   context 'when user is not signed in' do
     it 'redirects to sign in page if user is not logged in' do
-      post friendship_requests_path
+      post friendship_requests_path, params: { friendship_request: { sender_id: user1.id, receiver_id: user2.id } }
       expect(response).to redirect_to new_user_session_path
       delete friendship_request_path '1'
       expect(response).to redirect_to new_user_session_path
     end
   end
-
+  
   context 'when user is signed in' do
-    let(:user1) { create(:user) }
-    let(:user2) { create(:user) }
     before do
       post user_session_path, params: { user: { email: user1.email, password: user1.password } }
     end
@@ -53,9 +54,7 @@ RSpec.describe 'Friendship Request Menagement', type: :request do
             expect(user1.sent_friendship_requests.count).to eq(1)
             expect(user2.received_friendship_requests.count).to eq(1)
           end
-          it 'stays on the page' do
-            # expect(response).to render_template
-          end
+          it 'stays on the page' 
         end
       end
     end 

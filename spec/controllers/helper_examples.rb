@@ -11,7 +11,7 @@ RSpec.shared_examples 'redirecting_not_logged_in' do |action, method|
         delete action
       end
     end
-    expect(response).to redirect_to(new_user_registration_url)
+    expect(response).to redirect_to(new_user_session_url)
   end
   it "when the user is logged in returns http success" do
     allow(controller).to receive(:user_signed_in?).and_return(true)

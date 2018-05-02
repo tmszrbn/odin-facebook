@@ -1,4 +1,6 @@
 class FriendshipsController < ApplicationController
+  
+  before_action :require_login
 
   def create
     return nil unless current_user.can_accept_friendship_request_from? User.find(params[:friendship][:friend_id])

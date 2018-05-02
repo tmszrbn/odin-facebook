@@ -17,15 +17,11 @@ class PostsController < ApplicationController
   end
 
   def create
-    unless user_signed_in?
-      redirect_to new_user_registration_path 
+    @post = Post.new post_params
+    if @post.save
+      redirect_to @post
     else
-      @post = Post.new post_params
-      if @post.save
-        redirect_to @post
-      else
-        render :new
-      end
+      render :new
     end
   end
 

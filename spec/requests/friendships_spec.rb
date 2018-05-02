@@ -2,18 +2,19 @@ require 'rails_helper'
 
 describe 'Friendship Management' do
   
+  let(:user1) { create(:user) }
+  let(:user2) { create(:user) }
+ 
   context 'when user is not signed in' do
     it 'redirects to sign in page if user is not logged in' do
-      post friendship_requests_path
+      post friendships_path, params: { friendship: { user_id: user1.id, friend_id: user2.id } }
       expect(response).to redirect_to new_user_session_path
       delete friendship_request_path '1'
       expect(response).to redirect_to new_user_session_path
     end
   end
-
+  
   context 'when user is signed in and tries to create a friendship' do
-    let(:user1) { create(:user) }
-    let(:user2) { create(:user) }
     before do
       post user_session_path, params: { user: { email: user1.email, password: user1.password } }
     end

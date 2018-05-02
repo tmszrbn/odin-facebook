@@ -1,7 +1,8 @@
 class FriendshipRequestsController < ApplicationController
 
+  before_action :require_login
+
   def create
-    debugger
     request = FriendshipRequest.new friendship_request_params
     return nil if current_user.friends_with? User.find(params[:friendship_request][:receiver_id])
     if request.save
