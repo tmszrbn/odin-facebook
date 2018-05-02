@@ -49,6 +49,27 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '#can_accept_friendship_request_from?' do
+    context 'the users are friends already' do
+      it 'returns false' do
+        expect(u1.can_accept_friendship_request_from? u2).to eq(false)
+      end
+    end
+    context 'the user is not receiver of friendship request' do
+      it 'returns false' do
+        expect(u1.can_accept_friendship_request_from? u2).to eq(false)
+      end
+    end
+    context 'the user is receiver of friendship request' do
+      before do
+        allow(u1).to receive(:friendship_request_from?).with(u2).and_return(true)
+      end
+      it 'return true' do
+        expect(u1.can_accept_friendship_request_from? u2).to eq(true)
+      end
+    end
+  end
+
   describe '#accept_friendship_request' do
     context 'there is no sent friendship request between users' do
       it 'does nothing' do

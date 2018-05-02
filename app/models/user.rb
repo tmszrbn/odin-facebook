@@ -46,6 +46,10 @@ class User < ApplicationRecord
     self.friends.where(id: user.id).exists? || self.inverse_friends.where(id: user.id).exists?
   end
 
+  def can_accept_friendship_request_from? user
+    !self.friends_with?(user) && self.friendship_request_from?(user)
+  end
+
   def create_post title, content
     self.posts.create title: title, content: content
   end
