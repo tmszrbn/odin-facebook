@@ -1,0 +1,1 @@
+= button_to "Like #{resource.likes.count}", likes_path, method: :post, params: { like: { user_id: current_user.id, likeable_id: resource.id, likeable_type: resource.class } }

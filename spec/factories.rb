@@ -9,4 +9,10 @@ FactoryBot.define do
     sequence(:content) { |n| "Content of #{n} post"}
     user
   end
+  factory :comment do
+    sequence(:commentable_id) { |n| "#{n}"}
+    commentable_type 'Post'
+    sequence(:content) { |n| "This is content of #{n.ordinalize} comment"}
+    sequence(:user_id) { |n| "#{n}" }
+  end
 end

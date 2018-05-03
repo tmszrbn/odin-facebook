@@ -3,7 +3,6 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new comment_params
-    debugger
     if @comment.save
     end
   end

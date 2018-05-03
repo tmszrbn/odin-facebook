@@ -1,7 +1,11 @@
 %li
-  %div= post.title
-  %div= post.content
-  = button_to "Like #{post.likes.count}", likes_path, method: :post, params: { like: { user_id: current_user.id, likeable_id: post.id, likeable_type: post.class } }
-  = flash.each do |msg|
-    = msg
+  %div= "id: #{post.id}"
+  %div= "author: #{post.user.name}"
+  %div= "title: #{post.title}"
+  %div= "content: #{post.content}"
+  %div
+    %div= "Number of comments: #{post.comments.count}"
+    = render partial: 'shared/comments', locals: { comments: post.comments.to_a }
+  = render partial: 'shared/like_button', locals: { resource: post }
+
     

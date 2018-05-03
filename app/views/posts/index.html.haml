@@ -1,3 +1,4 @@
 %h1 Posts#index
-
+= flash.each do |msg|
+  = msg
 %ul= render @posts

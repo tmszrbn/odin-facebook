@@ -1,0 +1,6 @@
+%ul 
+  = "Comments:"
+  - comments.each do |comment|
+    %li
+      = comment.content
+      = comment.user.name
