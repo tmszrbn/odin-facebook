@@ -26,11 +26,34 @@ RSpec.describe 'Posts Management' do
   end
 
   describe 'when user is signed in' do
-    let(:user) { create(:user) }
+    let(:user1) { create(:user) }
+    let(:user2) { create(:user) }
+    let(:user3) { create(:user) }
+    let(:user4) { create(:user) }
+    let!(:post1) { create(:post, user: user1)}
+    let!(:post2) { create(:post, user: user2)}
+    let!(:post3) { create(:post, user: user3)}
+    let!(:post4) { create(:post, user: user3)}
+    let!(:post5) { create(:post, user: user4)}
     before do
-      post user_session_path, params: { user: { email: user.email, password: user.password } }
+      post user_session_path, params: { user: { email: user1.email, password: user1.password } }
     end
-    context 'when user is creating new post' do
+    context '#index' do
+      before do
+        get posts_path
+      end
+      it '@posts contains all posts of all users\'s friends' do
+        allow(controller).to receive(:current_user).and_return(user1)
+        expect(assigns(:posts).count).to eq(1)
+        user1.friends << user2
+        get posts_path
+        expect(assigns(:posts).count).to eq(2)
+        user1.inverse_friends << user3
+        get posts_path
+        expect(assigns(:posts).count).to eq(4)
+      end
+    end
+    context '#new' do
       before do
         get new_post_path
       end
@@ -38,13 +61,13 @@ RSpec.describe 'Posts Management' do
         expect(response).to render_template (:new)
       end
     end
-    context 'when user creates new post' do
+    context '#create' do
       context 'when user uses `params[post]` with `title`, `content` and `user_id`' do
         before do
           post posts_path, params: { post: 
                                     { title: 'Post title', 
                                       content: 'Post content', 
-                                      user_id: user.id } 
+                                      user_id: user1.id } 
                                    }
         end
           it 'creates the new post' do

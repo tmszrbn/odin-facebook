@@ -14,7 +14,7 @@ RSpec.describe User, type: :model do
 
   let(:u1) { User.create email: 'user1@email.com', password: 'password' }
   let(:u2) { User.create email: 'user2@email.com', password: 'password' }
-  # let(:u3) { User.create email: 'user3@email.com', password: 'password' }
+  let(:u3) { User.create email: 'user3@email.com', password: 'password' }
   let(:p1) { Post.create title:'post1', content:'First post\'s content', user_id: u2.id }
   
   
@@ -89,6 +89,26 @@ RSpec.describe User, type: :model do
         expect(u1.sent_friendship_requests.count).to eq(0)
       end
     end    
+  end
+
+  describe '#all_friends' do
+    it 'returns user\'s inverse and normal friends' do
+      expect(u1.all_friends.count).to eq(0)
+      u1.friends << u2
+      expect(u1.all_friends.count).to eq(1)
+      u1.inverse_friends << u3
+      expect(u1.all_friends.count).to eq(2)
+    end
+  end
+  
+  describe '#all_friends_ids' do
+    it 'returns all user\'s friends ids' do
+      expect(u1.all_friends_ids).to eq([])
+      u1.friends << u2
+      expect(u1.all_friends_ids).to eq([u2.id])
+      u1.inverse_friends << u3
+      expect(u1.all_friends_ids).to eq([u2.id, u3.id])
+    end
   end
 
   describe '#create_post' do

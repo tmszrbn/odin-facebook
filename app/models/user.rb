@@ -42,6 +42,9 @@ class User < ApplicationRecord
   def all_friends
     self.friends + self.inverse_friends
   end
+  def all_friends_ids
+    self.all_friends.pluck(:id)
+  end
   def friends_with? user
     self.friends.where(id: user.id).exists? || self.inverse_friends.where(id: user.id).exists?
   end
