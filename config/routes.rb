@@ -4,18 +4,15 @@ Rails.application.routes.draw do
   get 'users/show'
   # devise_scope :user do
   #   root to: 'devise/registrations#new'
-  # end
-
-  get 'comments/new'
-  get 'comments/edit'
+  # end  
   
-  resources :posts
-  
+  resources :comments, only: [:create, :destroy, :update]
   resources :friendship_requests, only: [:create, :destroy]
   resources :friendships, only: [:create, :destroy]
   resources :likes, only: [:create, :destroy]
-
+  resources :posts
   devise_for :users
+
   # devise_for :users, controllers: {
   #   sessions: 'users/sessions'
   # }

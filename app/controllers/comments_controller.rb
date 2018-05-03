@@ -1,15 +1,22 @@
 class CommentsController < ApplicationController
-  before_action :require_login, except: [:new]
-
-  def new
-  end
-  
-  def edit
-    redirect_to new_user_session_path unless user_signed_in?
-  end
+  before_action :require_login
 
   def create
-    redirect_to new_user_session_path unless user_signed_in?
+    @comment = Comment.new comment_params
+    debugger
+    if @comment.save
+    end
   end
+
+  def destroy
+  end
+  
+  def update
+  end
+
+  private
+    def comment_params
+      params.require(:comment).permit(:user_id, :commentable_id, :commentable_type, :content)
+    end
 
 end
