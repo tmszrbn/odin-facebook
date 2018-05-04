@@ -1,0 +1,1 @@
+= button_to "Send Friend Request", friendship_requests_path, method: :post, params: { friendship_request: { sender_id: current_user.id, receiver_id: receiver.id } }, form_class: "friendship_request_btn"

@@ -52,6 +52,9 @@ class User < ApplicationRecord
   def can_accept_friendship_request_from? user
     !self.friends_with?(user) && self.friendship_request_from?(user)
   end
+  def can_send_friendship_request_to? user
+    !self.friends_with?(user) && !self.friendship_request_from?(user) && !self.friendship_request_to?(user) && self == user
+  end
 
   def create_post title, content
     self.posts.create title: title, content: content
