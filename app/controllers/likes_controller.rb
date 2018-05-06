@@ -4,8 +4,10 @@ class LikesController < ApplicationController
 
   def create
     like =  Like.new like_params
-    if like.save
-      message =  "Item liked"
+    unless current_user.likes_post? params[:like][:likeable_id]
+      if like.save
+        message =  "Item liked"
+      end
     else
       message = "Item not liked - something went wrong"
     end
@@ -15,7 +17,6 @@ class LikesController < ApplicationController
 
   def destroy
   end
-
 
   private 
     def like_params

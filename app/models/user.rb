@@ -64,8 +64,8 @@ class User < ApplicationRecord
   def like_post post
     self.liked_posts << post unless self.likes_post? post
   end
-  def likes_post? post
-    self.liked_posts.where(id: post.id).exists?
+  def likes_post? id
+    self.liked_posts.where(id: id).exists?
   end
 
   def add_comment post, comment_body
