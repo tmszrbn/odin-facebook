@@ -1,3 +1,3 @@
 %li
-  = user.name
+  = user.email
   = render partial: 'friend_request_button', locals: { receiver: user } if current_user.can_send_friendship_request_to? user
