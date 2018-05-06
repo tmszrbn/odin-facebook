@@ -11,6 +11,7 @@ gem 'rails-controller-testing'
 gem 'omniauth-facebook'
 gem 'figaro'
 gem 'letter_opener', :group => :development
+gem 'sendgrid-ruby'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
