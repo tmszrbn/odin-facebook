@@ -6,13 +6,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   # def new
-  #   super
+    # super
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    UserMailer.with(user: @user).welcome_email.deliver_now if resource.persisted?
+  end
 
   # GET /resource/edit
   # def edit
@@ -38,7 +39,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
@@ -51,9 +52,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+    users_index_path
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)

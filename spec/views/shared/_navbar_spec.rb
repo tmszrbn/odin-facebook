@@ -13,6 +13,10 @@ RSpec.describe 'shared/_navbar.html.haml' do
       render
       expect(rendered).not_to include('Friend requests')
     end
+    it 'displays links to sign in' do
+      render
+      expect(rendered).to match /[Sign in | Sign in with Facebook].*[Sign in | Sign in with Facebook]/
+    end
   end
   context 'when the user is logged in' do
     before(:each) do
