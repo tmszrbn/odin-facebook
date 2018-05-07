@@ -1,8 +1,10 @@
 %li
   %div= "id: #{post.id}"
-  %div= "author: #{post.user.name}"
+  %div= "author: #{post.user.email}"
   %div= "title: #{post.title}"
-  %div= "content: #{post.content}"
+  %div
+    %p= "content: #{post.content}"
+    = image_tag post.photo.url
   %div
     %div= "Number of comments: #{post.comments.count}"
     = render partial: 'shared/comments', locals: { comments: post.comments.to_a }

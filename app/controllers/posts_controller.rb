@@ -2,8 +2,9 @@ class PostsController < ApplicationController
   before_action :require_login
 
   def index
-    @posts = Post.all_by current_user.all_friends_ids << current_user.id
     @like = Like.new
+    @post = Post.new
+    @posts = Post.all_by current_user.all_friends_ids << current_user.id
   end
 
   def edit
@@ -33,6 +34,6 @@ class PostsController < ApplicationController
 
   private 
     def post_params
-      params.require(:post).permit(:title, :content, :user_id)
+      params.require(:post).permit(:title, :content, :user_id, :photo)
     end
 end

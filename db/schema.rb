@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_04_113537) do
+ActiveRecord::Schema.define(version: 2018_05_07_035612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,13 +44,6 @@ ActiveRecord::Schema.define(version: 2018_05_04_113537) do
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
-  create_table "images", force: :cascade do |t|
-    t.bigint "imageable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["imageable_id"], name: "index_images_on_imageable_id"
-  end
-
   create_table "likes", force: :cascade do |t|
     t.bigint "user_id"
     t.string "likeable_type"
@@ -65,10 +58,12 @@ ActiveRecord::Schema.define(version: 2018_05_04_113537) do
     t.bigint "user_id"
     t.string "title"
     t.text "content"
-    t.bigint "image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["image_id"], name: "index_posts_on_image_id"
+    t.string "photo_file_name"
+    t.string "photo_content_type"
+    t.integer "photo_file_size"
+    t.datetime "photo_updated_at"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

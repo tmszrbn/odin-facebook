@@ -1,0 +1,6 @@
+= simple_form_for @post do |f|
+  = f.input :title, as: :string, label: 'Title of the post'
+  = f.input :content, as: :text, label: 'Content of the post'
+  = f.input :user_id, as: :hidden, input_html: { value: "#{current_user.id}" }
+  = f.input :photo, as: :file
+  = f.button :submit, label: 'Create post'
