@@ -25,7 +25,7 @@ RSpec.describe 'shared/_navbar.html.haml' do
     end
     it 'displays log out link' do 
       render
-      expect(rendered).to include('<a rel="nofollow" data-method="delete" href="/users/sign_out">')
+      expect(rendered).to include(destroy_user_session_path)
     end
     context 'when the user has received friend requests' do
       it 'displays received friend requests' do
